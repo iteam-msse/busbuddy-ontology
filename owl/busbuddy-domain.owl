@@ -10,29 +10,68 @@
 
 
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
-     xml:base="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domain.owl"
+     xml:base="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     ontologyIRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domain.owl">
+     ontologyIRI="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl">
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Declaration>
-        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Bus"/>
+        <Class IRI="#BusCompany"/>
     </Declaration>
     <Declaration>
-        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#BusStop"/>
+        <Class IRI="#Rider"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Trip"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Bus"/>
     </Declaration>
     <Declaration>
         <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Route"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#BusStop"/>
+        <ObjectProperty IRI="#busOf"/>
     </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasBus"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasRouteNumber"/>
+    </Declaration>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasBus"/>
+        <ObjectProperty IRI="#busOf"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty abbreviatedIRI=":topObjectProperty"/>
+    </FunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#busOf"/>
+        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Bus"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasBus"/>
+        <Class IRI="#BusCompany"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#busOf"/>
+        <Class IRI="#BusCompany"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasBus"/>
+        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Bus"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasRouteNumber"/>
+        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Route"/>
+    </DataPropertyDomain>
 </Ontology>
 
 
