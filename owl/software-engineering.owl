@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY software-engineering "https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#" >
+]>
+
+
+<rdf:RDF xmlns="https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#"
+     xml:base="https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:software-engineering="https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <rdf:Description rdf:about="&owl;topObjectProperty">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+    </rdf:Description>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#repositoryOf -->
+
+    <owl:ObjectProperty rdf:about="&software-engineering;repositoryOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="&software-engineering;AggregateRoot"/>
+        <rdfs:domain rdf:resource="&software-engineering;Repository"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#AggregateRoot -->
+
+    <owl:Class rdf:about="&software-engineering;AggregateRoot">
+        <rdfs:subClassOf rdf:resource="&software-engineering;Domain"/>
+        <owl:disjointWith rdf:resource="&software-engineering;ValueObject"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#BehavioralPattern -->
+
+    <owl:Class rdf:about="&software-engineering;BehavioralPattern">
+        <rdfs:subClassOf rdf:resource="&software-engineering;DesignPattern"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#CreationalPattern -->
+
+    <owl:Class rdf:about="&software-engineering;CreationalPattern">
+        <rdfs:subClassOf rdf:resource="&software-engineering;DesignPattern"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#DesignPattern -->
+
+    <owl:Class rdf:about="&software-engineering;DesignPattern"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#Domain -->
+
+    <owl:Class rdf:about="&software-engineering;Domain"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#Entity -->
+
+    <owl:Class rdf:about="&software-engineering;Entity">
+        <rdfs:subClassOf rdf:resource="&software-engineering;Domain"/>
+        <owl:disjointWith rdf:resource="&software-engineering;ValueObject"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#Factory -->
+
+    <owl:Class rdf:about="&software-engineering;Factory">
+        <rdfs:subClassOf rdf:resource="&software-engineering;CreationalPattern"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#Repository -->
+
+    <owl:Class rdf:about="&software-engineering;Repository">
+        <rdfs:subClassOf rdf:resource="&software-engineering;Domain"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#Service -->
+
+    <owl:Class rdf:about="&software-engineering;Service">
+        <rdfs:subClassOf rdf:resource="&software-engineering;Domain"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#Strategy -->
+
+    <owl:Class rdf:about="&software-engineering;Strategy">
+        <rdfs:subClassOf rdf:resource="&software-engineering;BehavioralPattern"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#ValueObject -->
+
+    <owl:Class rdf:about="&software-engineering;ValueObject">
+        <rdfs:subClassOf rdf:resource="&software-engineering;Domain"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
+

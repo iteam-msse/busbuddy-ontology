@@ -1,78 +1,134 @@
 <?xml version="1.0"?>
 
 
-<!DOCTYPE Ontology [
+<!DOCTYPE rdf:RDF [
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
-    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY busbuddy "https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#" >
+    <!ENTITY busbuddy-domain "https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#" >
 ]>
 
 
-<Ontology xmlns="http://www.w3.org/2002/07/owl#"
-     xml:base="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl"
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:busbuddy-domain="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     ontologyIRI="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl">
-    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
-    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
-    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
-    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
-    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-    <Declaration>
-        <Class IRI="#BusCompany"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Rider"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Trip"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Bus"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Route"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#busOf"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasBus"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasRouteNumber"/>
-    </Declaration>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#hasBus"/>
-        <ObjectProperty IRI="#busOf"/>
-    </InverseObjectProperties>
-    <FunctionalObjectProperty>
-        <ObjectProperty abbreviatedIRI=":topObjectProperty"/>
-    </FunctionalObjectProperty>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#busOf"/>
-        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Bus"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasBus"/>
-        <Class IRI="#BusCompany"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#busOf"/>
-        <Class IRI="#BusCompany"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasBus"/>
-        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Bus"/>
-    </ObjectPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#hasRouteNumber"/>
-        <Class IRI="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Route"/>
-    </DataPropertyDomain>
-</Ontology>
+     xmlns:busbuddy="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#">
+    <Ontology rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#topObjectProperty">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    </rdf:Description>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#busOf -->
+
+    <ObjectProperty rdf:about="&busbuddy-domain;busOf">
+        <rdfs:range rdf:resource="&busbuddy-domain;BusCompany"/>
+        <rdfs:domain rdf:resource="&busbuddy;Bus"/>
+    </ObjectProperty>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#hasBus -->
+
+    <ObjectProperty rdf:about="&busbuddy-domain;hasBus">
+        <rdfs:domain rdf:resource="&busbuddy-domain;BusCompany"/>
+        <inverseOf rdf:resource="&busbuddy-domain;busOf"/>
+        <rdfs:range rdf:resource="&busbuddy;Bus"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#hasRouteNumber -->
+
+    <DatatypeProperty rdf:about="&busbuddy-domain;hasRouteNumber">
+        <rdfs:domain rdf:resource="&busbuddy;Route"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#BusCompany -->
+
+    <Class rdf:about="&busbuddy-domain;BusCompany"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#GPS -->
+
+    <Class rdf:about="&busbuddy-domain;GPS"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Rider -->
+
+    <Class rdf:about="&busbuddy-domain;Rider"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Stop -->
+
+    <Class rdf:about="&busbuddy-domain;Stop"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Trip -->
+
+    <Class rdf:about="&busbuddy-domain;Trip"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Bus -->
+
+    <Class rdf:about="&busbuddy;Bus"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Route -->
+
+    <Class rdf:about="&busbuddy;Route"/>
+</rdf:RDF>
 
 
 
