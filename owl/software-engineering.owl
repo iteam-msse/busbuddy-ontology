@@ -32,14 +32,6 @@
     
 
 
-    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
-
-    <rdf:Description rdf:about="&owl;topObjectProperty">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-    </rdf:Description>
-    
-
-
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#repositoryOf -->
 
     <owl:ObjectProperty rdf:about="&software-engineering;repositoryOf">

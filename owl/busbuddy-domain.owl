@@ -24,6 +24,28 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Object Properties
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -32,29 +54,21 @@
     
 
 
-    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
-
-    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#topObjectProperty">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    </rdf:Description>
-    
-
-
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#busOf -->
 
     <ObjectProperty rdf:about="&busbuddy-domain;busOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
         <rdfs:range rdf:resource="&busbuddy-domain;BusCompany"/>
         <rdfs:domain rdf:resource="&busbuddy;Bus"/>
     </ObjectProperty>
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#hasBus -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#hasGPS -->
 
-    <ObjectProperty rdf:about="&busbuddy-domain;hasBus">
-        <rdfs:domain rdf:resource="&busbuddy-domain;BusCompany"/>
-        <inverseOf rdf:resource="&busbuddy-domain;busOf"/>
-        <rdfs:range rdf:resource="&busbuddy;Bus"/>
+    <ObjectProperty rdf:about="&busbuddy-domain;hasGPS">
+        <rdfs:range rdf:resource="&busbuddy-domain;GPS"/>
+        <rdfs:domain rdf:resource="&busbuddy;Bus"/>
     </ObjectProperty>
     
 
@@ -101,6 +115,12 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Module -->
+
+    <Class rdf:about="&busbuddy-domain;Module"/>
+    
+
+
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Rider -->
 
     <Class rdf:about="&busbuddy-domain;Rider"/>
@@ -113,9 +133,34 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#TransitService -->
+
+    <Class rdf:about="&busbuddy-domain;TransitService">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;Module"/>
+    </Class>
+    
+
+
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Trip -->
 
     <Class rdf:about="&busbuddy-domain;Trip"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#User -->
+
+    <Class rdf:about="&busbuddy-domain;User">
+        <rdfs:comment rdf:datatype="&xsd;string">A registered BusBuddy customer.</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#UserManagementService -->
+
+    <Class rdf:about="&busbuddy-domain;UserManagementService">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;Module"/>
+        <rdfs:comment rdf:datatype="&xsd;string">A Service for managing BusBuddy Users.</rdfs:comment>
+    </Class>
     
 
 
