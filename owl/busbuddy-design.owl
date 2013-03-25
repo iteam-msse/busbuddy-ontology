@@ -39,6 +39,14 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#hasGlobalId -->
+
+    <owl:DatatypeProperty rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#hasGlobalId">
+        <rdfs:subPropertyOf rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#hasId"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#hasId -->
 
     <owl:DatatypeProperty rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#hasId">
@@ -58,10 +66,107 @@
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Module -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Alert -->
 
-    <rdf:Description rdf:about="&busbuddy-domain;Module">
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Alert">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#AlertType -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#AlertType">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#ScheduleInformation"/>
+                    <rdf:Description rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UnplannedDisruption"/>
+                    <rdf:Description rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#PlannedDisruption"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Module -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Module">
         <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#OneTimeAlert -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#OneTimeAlert">
+        <rdfs:subClassOf rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Alert"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#RecurringAlert -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#RecurringAlert">
+        <rdfs:subClassOf rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Alert"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserModule -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserModule">
+        <rdfs:subClassOf rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Module"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserRepository -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserRepository">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&software-engineering;Repository"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&software-engineering;isRepositoryOf"/>
+                        <owl:allValuesFrom rdf:resource="&busbuddy-domain;User"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&software-engineering;Repository"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#DomainConcept -->
+
+    <rdf:Description rdf:about="&busbuddy-domain;DomainConcept">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&software-engineering;Entity"/>
+                    <rdf:Description rdf:about="&software-engineering;ValueObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </rdf:Description>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#Repository -->
+
+    <rdf:Description rdf:about="&software-engineering;Repository">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&software-engineering;isRepositoryOf"/>
+                <owl:onClass rdf:resource="&software-engineering;AggregateRoot"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </rdf:Description>
     
 
@@ -77,11 +182,39 @@
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Bus -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#PlannedDisruption -->
 
-    <software-engineering:Entity rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Bus">
+    <AlertType rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#PlannedDisruption">
         <rdf:type rdf:resource="&owl;NamedIndividual"/>
-    </software-engineering:Entity>
+    </AlertType>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#ScheduleInformation -->
+
+    <AlertType rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#ScheduleInformation">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </AlertType>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UnplannedDisruption -->
+
+    <AlertType rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UnplannedDisruption">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </AlertType>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#InactiveUser -->
+
+    <busbuddy-domain:UserType rdf:about="&busbuddy-domain;InactiveUser"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#SystemAdministrator -->
+
+    <busbuddy-domain:UserType rdf:about="&busbuddy-domain;SystemAdministrator"/>
 </rdf:RDF>
 
 

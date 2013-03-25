@@ -54,21 +54,16 @@
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#busOf -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#hasGPS -->
 
-    <ObjectProperty rdf:about="&busbuddy-domain;busOf">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-        <rdfs:range rdf:resource="&busbuddy-domain;BusCompany"/>
-        <rdfs:domain rdf:resource="&busbuddy;Bus"/>
-    </ObjectProperty>
+    <ObjectProperty rdf:about="&busbuddy-domain;hasGPS"/>
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#hasGPS -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#isBusOf -->
 
-    <ObjectProperty rdf:about="&busbuddy-domain;hasGPS">
-        <rdfs:range rdf:resource="&busbuddy-domain;GPS"/>
-        <rdfs:domain rdf:resource="&busbuddy;Bus"/>
+    <ObjectProperty rdf:about="&busbuddy-domain;isBusOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
     </ObjectProperty>
     
 
@@ -105,74 +100,138 @@
 
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#BusCompany -->
 
-    <Class rdf:about="&busbuddy-domain;BusCompany"/>
+    <Class rdf:about="&busbuddy-domain;BusCompany">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    </Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#DomainConcept -->
+
+    <Class rdf:about="&busbuddy-domain;DomainConcept"/>
     
 
 
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#GPS -->
 
-    <Class rdf:about="&busbuddy-domain;GPS"/>
+    <Class rdf:about="&busbuddy-domain;GPS">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    </Class>
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Module -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Session -->
 
-    <Class rdf:about="&busbuddy-domain;Module"/>
-    
-
-
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Rider -->
-
-    <Class rdf:about="&busbuddy-domain;Rider"/>
+    <Class rdf:about="&busbuddy-domain;Session">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    </Class>
     
 
 
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Stop -->
 
-    <Class rdf:about="&busbuddy-domain;Stop"/>
-    
-
-
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#TransitService -->
-
-    <Class rdf:about="&busbuddy-domain;TransitService">
-        <rdfs:subClassOf rdf:resource="&busbuddy-domain;Module"/>
+    <Class rdf:about="&busbuddy-domain;Stop">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
     </Class>
     
 
 
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Trip -->
 
-    <Class rdf:about="&busbuddy-domain;Trip"/>
+    <Class rdf:about="&busbuddy-domain;Trip">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    </Class>
     
 
 
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#User -->
 
     <Class rdf:about="&busbuddy-domain;User">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
         <rdfs:comment rdf:datatype="&xsd;string">A registered BusBuddy customer.</rdfs:comment>
     </Class>
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#UserManagementService -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#UserType -->
 
-    <Class rdf:about="&busbuddy-domain;UserManagementService">
-        <rdfs:subClassOf rdf:resource="&busbuddy-domain;Module"/>
-        <rdfs:comment rdf:datatype="&xsd;string">A Service for managing BusBuddy Users.</rdfs:comment>
+    <Class rdf:about="&busbuddy-domain;UserType">
+        <equivalentClass>
+            <Class>
+                <oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&busbuddy-domain;InactiveUser"/>
+                    <rdf:Description rdf:about="&busbuddy-domain;SuspendedUser"/>
+                    <rdf:Description rdf:about="&busbuddy-domain;ActiveUser"/>
+                    <rdf:Description rdf:about="&busbuddy-domain;NormalUser"/>
+                    <rdf:Description rdf:about="&busbuddy-domain;SystemAdministrator"/>
+                </oneOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
     </Class>
     
 
 
     <!-- https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Bus -->
 
-    <Class rdf:about="&busbuddy;Bus"/>
+    <Class rdf:about="&busbuddy;Bus">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    </Class>
     
 
 
     <!-- https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Route -->
 
-    <Class rdf:about="&busbuddy;Route"/>
+    <Class rdf:about="&busbuddy;Route">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    </Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#ActiveUser -->
+
+    <busbuddy-domain:UserType rdf:about="&busbuddy-domain;ActiveUser">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </busbuddy-domain:UserType>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#InactiveUser -->
+
+    <NamedIndividual rdf:about="&busbuddy-domain;InactiveUser"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#NormalUser -->
+
+    <busbuddy-domain:UserType rdf:about="&busbuddy-domain;NormalUser">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </busbuddy-domain:UserType>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#SuspendedUser -->
+
+    <busbuddy-domain:UserType rdf:about="&busbuddy-domain;SuspendedUser">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </busbuddy-domain:UserType>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#SystemAdministrator -->
+
+    <NamedIndividual rdf:about="&busbuddy-domain;SystemAdministrator"/>
 </rdf:RDF>
 
 
