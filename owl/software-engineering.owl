@@ -17,7 +17,31 @@
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-    <owl:Ontology rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl"/>
+    <owl:Ontology rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl">
+        <rdfs:comment rdf:datatype="&xsd;string">A simple Software Engineering Ontology that captures basic Design Patters and Domain Driven Design concepts.</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
     
 
 
@@ -29,6 +53,14 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#aggregateOf -->
+
+    <owl:ObjectProperty rdf:about="&software-engineering;aggregateOf">
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
     
 
 
@@ -64,6 +96,14 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#implements -->
+
+    <owl:ObjectProperty rdf:about="&software-engineering;implements">
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#isEntityOf -->
 
     <owl:ObjectProperty rdf:about="&software-engineering;isEntityOf">
@@ -85,6 +125,37 @@
     <owl:ObjectProperty rdf:about="&software-engineering;isRootOf">
         <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
     </owl:ObjectProperty>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#uses -->
+
+    <owl:ObjectProperty rdf:about="&software-engineering;uses"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#hasGlobalId -->
+
+    <owl:DatatypeProperty rdf:about="&software-engineering;hasGlobalId">
+        <rdfs:subPropertyOf rdf:resource="&software-engineering;hasId"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#hasId -->
+
+    <owl:DatatypeProperty rdf:about="&software-engineering;hasId"/>
     
 
 
@@ -110,6 +181,17 @@
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#AbstractFactory -->
 
     <owl:Class rdf:about="&software-engineering;AbstractFactory">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&software-engineering;AbstractClass"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&software-engineering;creates"/>
+                        <owl:allValuesFrom rdf:resource="&software-engineering;AggregateRoot"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="&software-engineering;CreationalPattern"/>
     </owl:Class>
     
@@ -121,6 +203,7 @@
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&software-engineering;Class"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="&software-engineering;hasEntity"/>
                         <owl:allValuesFrom rdf:resource="&software-engineering;Entity"/>
@@ -131,12 +214,12 @@
                     </owl:Restriction>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="&software-engineering;hasRoot"/>
-                        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+                        <owl:onClass rdf:resource="&software-engineering;Entity"/>
+                        <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="&software-engineering;DomainDesignConcept"/>
         <owl:disjointWith rdf:resource="&software-engineering;Service"/>
     </owl:Class>
     
@@ -157,6 +240,12 @@
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="&software-engineering;Entity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&software-engineering;hasGlobalId"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -203,6 +292,13 @@
 
     <owl:Class rdf:about="&software-engineering;Entity">
         <rdfs:subClassOf rdf:resource="&software-engineering;DomainDesignConcept"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&software-engineering;hasId"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="&software-engineering;Interface"/>
         <owl:disjointWith rdf:resource="&software-engineering;Service"/>
         <owl:disjointWith rdf:resource="&software-engineering;ValueObject"/>
     </owl:Class>
@@ -213,6 +309,7 @@
 
     <owl:Class rdf:about="&software-engineering;Interface">
         <rdfs:subClassOf rdf:resource="&software-engineering;Class"/>
+        <owl:disjointWith rdf:resource="&software-engineering;ValueObject"/>
     </owl:Class>
     
 
@@ -227,6 +324,13 @@
 
     <owl:Class rdf:about="&software-engineering;Repository">
         <rdfs:subClassOf rdf:resource="&software-engineering;DomainDesignConcept"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&software-engineering;isRepositoryOf"/>
+                <owl:onClass rdf:resource="&software-engineering;AggregateRoot"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -242,6 +346,20 @@
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#Strategy -->
 
     <owl:Class rdf:about="&software-engineering;Strategy">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&software-engineering;hasContext"/>
+                        <owl:allValuesFrom rdf:resource="&software-engineering;Class"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&software-engineering;hasStrategy"/>
+                        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="&software-engineering;BehavioralPattern"/>
     </owl:Class>
     
