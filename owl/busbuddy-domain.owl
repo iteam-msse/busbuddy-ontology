@@ -6,6 +6,8 @@
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
     <!ENTITY busbuddy "https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#" >
+    <!ENTITY busbuddy-domian "https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domian.owl#" >
+    <!ENTITY busbuddy-domain2 "https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domain.owl#" >
     <!ENTITY busbuddy-domain "https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#" >
 ]>
 
@@ -14,9 +16,11 @@
      xml:base="http://www.w3.org/2002/07/owl"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:busbuddy-domain="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#"
+     xmlns:busbuddy-domain2="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domain.owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:busbuddy="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#">
+     xmlns:busbuddy="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#"
+     xmlns:busbuddy-domian="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domian.owl#">
     <Ontology rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl"/>
     
 
@@ -82,7 +86,7 @@
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#hasRouteNumber -->
 
     <DatatypeProperty rdf:about="&busbuddy-domain;hasRouteNumber">
-        <rdfs:domain rdf:resource="&busbuddy;Route"/>
+        <rdfs:domain rdf:resource="&busbuddy-domain2;Route"/>
     </DatatypeProperty>
     
 
@@ -95,6 +99,31 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Alert -->
+
+    <Class rdf:about="&busbuddy-domain;Alert">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    </Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#AlertType -->
+
+    <Class rdf:about="&busbuddy-domain;AlertType">
+        <equivalentClass>
+            <Class>
+                <oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&busbuddy-domain;PlannedDistruption"/>
+                    <rdf:Description rdf:about="&busbuddy-domain;UnplannedDisruption"/>
+                    <rdf:Description rdf:about="&busbuddy-domain;ScheduleInformation"/>
+                </oneOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    </Class>
     
 
 
@@ -116,6 +145,23 @@
 
     <Class rdf:about="&busbuddy-domain;GPS">
         <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+        <rdfs:comment>Global Positioning System.</rdfs:comment>
+    </Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#OneTimeAlert -->
+
+    <Class rdf:about="&busbuddy-domain;OneTimeAlert">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;Alert"/>
+    </Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#RecurringAlert -->
+
+    <Class rdf:about="&busbuddy-domain;RecurringAlert">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;Alert"/>
     </Class>
     
 
@@ -172,17 +218,17 @@
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Bus -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domain.owl#Route -->
 
-    <Class rdf:about="&busbuddy;Bus">
+    <Class rdf:about="&busbuddy-domain2;Route">
         <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
     </Class>
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#Route -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domian.owl#Bus -->
 
-    <Class rdf:about="&busbuddy;Route">
+    <Class rdf:about="&busbuddy-domian;Bus">
         <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
     </Class>
     
@@ -221,6 +267,22 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#PlannedDistruption -->
+
+    <busbuddy-domain:AlertType rdf:about="&busbuddy-domain;PlannedDistruption">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </busbuddy-domain:AlertType>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#ScheduleInformation -->
+
+    <busbuddy-domain:AlertType rdf:about="&busbuddy-domain;ScheduleInformation">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </busbuddy-domain:AlertType>
+    
+
+
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#SuspendedUser -->
 
     <busbuddy-domain:UserType rdf:about="&busbuddy-domain;SuspendedUser">
@@ -232,6 +294,39 @@
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#SystemAdministrator -->
 
     <NamedIndividual rdf:about="&busbuddy-domain;SystemAdministrator"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#UnplannedDisruption -->
+
+    <busbuddy-domain:AlertType rdf:about="&busbuddy-domain;UnplannedDisruption">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </busbuddy-domain:AlertType>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&busbuddy-domain;Alert"/>
+            <rdf:Description rdf:about="&busbuddy-domain;BusCompany"/>
+            <rdf:Description rdf:about="&busbuddy-domain;GPS"/>
+            <rdf:Description rdf:about="&busbuddy-domain;Session"/>
+            <rdf:Description rdf:about="&busbuddy-domain;Stop"/>
+            <rdf:Description rdf:about="&busbuddy-domain;Trip"/>
+            <rdf:Description rdf:about="&busbuddy-domain;User"/>
+            <rdf:Description rdf:about="&busbuddy-domain2;Route"/>
+            <rdf:Description rdf:about="&busbuddy-domian;Bus"/>
+        </members>
+    </rdf:Description>
 </rdf:RDF>
 
 

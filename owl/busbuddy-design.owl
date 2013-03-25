@@ -7,6 +7,7 @@
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
     <!ENTITY busbuddy "https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#" >
+    <!ENTITY busbuddy-domain2 "https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domain.owl#" >
     <!ENTITY busbuddy-domain "https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#" >
     <!ENTITY software-engineering "https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#" >
 ]>
@@ -18,6 +19,7 @@
      xmlns:software-engineering="https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#"
      xmlns:busbuddy-domain="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:busbuddy-domain2="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domain.owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:busbuddy="https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy.owl#">
@@ -25,6 +27,39 @@
         <owl:imports rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl"/>
         <owl:imports rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl"/>
     </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#hasEntity -->
+
+    <owl:ObjectProperty rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#hasEntity"/>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#hasRoot -->
+
+    <owl:ObjectProperty rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#hasRoot">
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#isRootOf -->
+
+    <owl:ObjectProperty rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#isRootOf">
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
     
 
 
@@ -66,10 +101,18 @@
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Alert -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#AlertModule -->
 
-    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Alert">
-        <rdfs:subClassOf rdf:resource="&busbuddy-domain;DomainConcept"/>
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#AlertModule">
+        <rdfs:subClassOf rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Module"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#AlertRepository -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#AlertRepository">
+        <rdfs:subClassOf rdf:resource="&software-engineering;Repository"/>
     </owl:Class>
     
 
@@ -91,6 +134,14 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#MappingModule -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#MappingModule">
+        <rdfs:subClassOf rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Module"/>
+    </owl:Class>
+    
+
+
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Module -->
 
     <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Module">
@@ -99,18 +150,41 @@
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#OneTimeAlert -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#RouteAggregate -->
 
-    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#OneTimeAlert">
-        <rdfs:subClassOf rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Alert"/>
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#RouteAggregate">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&software-engineering;Aggregate"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&software-engineering;hasEntity"/>
+                        <owl:allValuesFrom rdf:resource="&software-engineering;Service"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&software-engineering;hasRoot"/>
+                        <owl:allValuesFrom rdf:resource="&busbuddy-domain2;Route"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&software-engineering;Aggregate"/>
     </owl:Class>
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#RecurringAlert -->
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#TrackingModule -->
 
-    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#RecurringAlert">
-        <rdfs:subClassOf rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Alert"/>
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#TrackingModule">
+        <rdfs:subClassOf rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Module"/>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#TransitModule -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#TransitModule">
+        <rdfs:subClassOf rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#Module"/>
     </owl:Class>
     
 
@@ -132,7 +206,8 @@
                     <rdf:Description rdf:about="&software-engineering;Repository"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="&software-engineering;isRepositoryOf"/>
-                        <owl:allValuesFrom rdf:resource="&busbuddy-domain;User"/>
+                        <owl:onClass rdf:resource="&busbuddy-domain;User"/>
+                        <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -157,16 +232,49 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#CreationalPattern -->
+
+    <rdf:Description rdf:about="&software-engineering;CreationalPattern">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&software-engineering;creates"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="&software-engineering;Entity"/>
+                            <rdf:Description rdf:about="&software-engineering;ValueObject"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </rdf:Description>
+    
+
+
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/software-engineering.owl#Repository -->
 
     <rdf:Description rdf:about="&software-engineering;Repository">
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="&software-engineering;isRepositoryOf"/>
-                <owl:onClass rdf:resource="&software-engineering;AggregateRoot"/>
-                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-            </owl:Restriction>
-        </rdfs:subClassOf>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&software-engineering;DomainDesignConcept"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&software-engineering;isRepositoryOf"/>
+                        <owl:onClass rdf:resource="&software-engineering;AggregateRoot"/>
+                        <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </rdf:Description>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/owl/busbuddy-domain.owl#Route -->
+
+    <rdf:Description rdf:about="&busbuddy-domain2;Route">
+        <rdfs:subClassOf rdf:resource="&software-engineering;AggregateRoot"/>
     </rdf:Description>
     
 
