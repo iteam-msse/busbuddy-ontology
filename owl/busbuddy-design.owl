@@ -103,6 +103,42 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#CreateUser -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#CreateUser">
+        <rdfs:subClassOf rdf:resource="&software-engineering;Operation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&software-engineering;isOperationOf"/>
+                <owl:allValuesFrom rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserManagementService"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#GetRouteById -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#GetRouteById">
+        <rdfs:subClassOf rdf:resource="&software-engineering;Operation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&software-engineering;isOperationOf"/>
+                <owl:allValuesFrom rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#TransitService"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#RouteAggregate -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#RouteAggregate">
+        <rdfs:subClassOf rdf:resource="&software-engineering;Aggregate"/>
+    </owl:Class>
+    
+
+
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#TrackingService -->
 
     <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#TrackingService">
@@ -126,6 +162,15 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserManagementService -->
+
+    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserManagementService">
+        <rdfs:subClassOf rdf:resource="&software-engineering;Service"/>
+        <rdfs:comment rdf:datatype="&xsd;string">This service keeps track of the various users of the BusBuddy application, and their transit services and route subscriptions.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserRepository -->
 
     <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserRepository">
@@ -142,15 +187,6 @@
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="&software-engineering;Repository"/>
-    </owl:Class>
-    
-
-
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserService -->
-
-    <owl:Class rdf:about="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#UserService">
-        <rdfs:subClassOf rdf:resource="&software-engineering;Service"/>
-        <rdfs:comment rdf:datatype="&xsd;string">This service keeps track of the various users of the BusBuddy application, and their transit services and route subscriptions.</rdfs:comment>
     </owl:Class>
     
 
@@ -190,6 +226,12 @@
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Route -->
 
     <rdf:Description rdf:about="&busbuddy-domain;Route">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&software-engineering;isRootOf"/>
+                <owl:allValuesFrom rdf:resource="https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-design.owl#RouteAggregate"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="&software-engineering;AggregateRoot"/>
     </rdf:Description>
     

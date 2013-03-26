@@ -247,30 +247,6 @@
     
 
 
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Trip -->
-
-    <Class rdf:about="&busbuddy-domain;Trip">
-        <rdfs:subClassOf rdf:resource="&busbuddy-domain;BusBuddyDomainConcept"/>
-        <rdfs:subClassOf>
-            <Class>
-                <intersectionOf rdf:parseType="Collection">
-                    <Restriction>
-                        <onProperty rdf:resource="&busbuddy-domain;hasStop"/>
-                        <allValuesFrom rdf:resource="&busbuddy-domain;Stop"/>
-                    </Restriction>
-                    <Restriction>
-                        <onProperty rdf:resource="&busbuddy-domain;hasStop"/>
-                        <minCardinality rdf:datatype="&xsd;nonNegativeInteger">2</minCardinality>
-                    </Restriction>
-                </intersectionOf>
-            </Class>
-        </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="&xsd;string">A Trip is a sequence of two or more Stops that occurs at specific time.</rdfs:comment>
-        <rdfs:seeAlso rdf:resource="&busbuddy-domain;Stop"/>
-    </Class>
-    
-
-
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#User -->
 
     <Class rdf:about="&busbuddy-domain;User">
@@ -367,31 +343,6 @@
     <NamedIndividual rdf:about="&busbuddy-domain;UnplannedDisruption">
         <rdf:type rdf:resource="&busbuddy-domain;AlertType"/>
     </NamedIndividual>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // General axioms
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <members rdf:parseType="Collection">
-            <rdf:Description rdf:about="&busbuddy-domain;Alert"/>
-            <rdf:Description rdf:about="&busbuddy-domain;Bus"/>
-            <rdf:Description rdf:about="&busbuddy-domain;BusCompany"/>
-            <rdf:Description rdf:about="&busbuddy-domain;GPS"/>
-            <rdf:Description rdf:about="&busbuddy-domain;Route"/>
-            <rdf:Description rdf:about="&busbuddy-domain;Session"/>
-            <rdf:Description rdf:about="&busbuddy-domain;Stop"/>
-            <rdf:Description rdf:about="&busbuddy-domain;Trip"/>
-            <rdf:Description rdf:about="&busbuddy-domain;User"/>
-        </members>
-    </rdf:Description>
 </rdf:RDF>
 
 
