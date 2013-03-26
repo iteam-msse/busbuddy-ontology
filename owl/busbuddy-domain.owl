@@ -58,6 +58,12 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#uses -->
+
+    <ObjectProperty rdf:about="&busbuddy-domain;uses"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -92,6 +98,7 @@
 
     <Class rdf:about="&busbuddy-domain;Alert">
         <rdfs:subClassOf rdf:resource="&busbuddy-domain;BusBuddyDomainConcept"/>
+        <rdfs:comment rdf:datatype="&xsd;string">A system-initiated User notification.</rdfs:comment>
     </Class>
     
 
@@ -128,6 +135,15 @@
     
 
 
+    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#BusBuddy -->
+
+    <Class rdf:about="&busbuddy-domain;BusBuddy">
+        <rdfs:subClassOf rdf:resource="&busbuddy-domain;BusBuddyDomainConcept"/>
+        <rdfs:comment>We are proposing a application that can consume an API from our own server and that is capable of running in multiple platforms. Our system will process information gathered from different sources and using user’s current location, will alert them about the most optimal route to reach their destination using public transportation. This system will seamlessly integrate different aspect of commuting into one single application thus making commuters life easier and saving valuable time.</rdfs:comment>
+    </Class>
+    
+
+
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#BusBuddyDomainConcept -->
 
     <Class rdf:about="&busbuddy-domain;BusBuddyDomainConcept">
@@ -142,14 +158,6 @@
         <rdfs:subClassOf rdf:resource="&busbuddy-domain;BusBuddyDomainConcept"/>
         <rdfs:comment rdf:datatype="&xsd;string">An organization that provides Bus transportation services.</rdfs:comment>
         <rdfs:seeAlso rdf:resource="&busbuddy-domain;Bus"/>
-    </Class>
-    
-
-
-    <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#Client -->
-
-    <Class rdf:about="&busbuddy-domain;Client">
-        <rdfs:subClassOf rdf:resource="&busbuddy-domain;BusBuddyDomainConcept"/>
     </Class>
     
 
@@ -199,6 +207,12 @@
 
     <Class rdf:about="&busbuddy-domain;Route">
         <rdfs:subClassOf rdf:resource="&busbuddy-domain;BusBuddyDomainConcept"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&busbuddy-domain;hasStop"/>
+                <minCardinality rdf:datatype="&xsd;nonNegativeInteger">2</minCardinality>
+            </Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="&xsd;string">A Route is a group of Trips that are displayed to Users as a single service.</rdfs:comment>
         <rdfs:seeAlso rdf:resource="&busbuddy-domain;Trip"/>
         <rdfs:seeAlso rdf:resource="&busbuddy-domain;User"/>
@@ -250,6 +264,12 @@
     <!-- https://raw.github.com/iteam-msse/busbuddy/master/owl/busbuddy-domain.owl#User -->
 
     <Class rdf:about="&busbuddy-domain;User">
+        <equivalentClass>
+            <Restriction>
+                <onProperty rdf:resource="&busbuddy-domain;uses"/>
+                <someValuesFrom rdf:resource="&busbuddy-domain;BusBuddy"/>
+            </Restriction>
+        </equivalentClass>
         <rdfs:subClassOf rdf:resource="&busbuddy-domain;BusBuddyDomainConcept"/>
         <rdfs:comment rdf:datatype="&xsd;string">A registered BusBuddy customer.</rdfs:comment>
     </Class>
